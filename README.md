@@ -1,19 +1,31 @@
-Xray tools
+# README 
+This repository contains code and information related to the paper "Scalable electron tomography for connectomics" by Kuan, Phan, et al. Questions about the code and data should be address to the corresponding authors: aaron.kuan@yale.edu, mellisman@ucsd.edu, wei-chung_lee@hms.harvard.edu
 
-add this repo to your system $PATH and $PYTHONPATH
+## Electron Tomography Data
 
-convert volumes to zarr files
+### 15 Sequential Serial Sections
+Dataset shown in Fig. 2 and Extended Data Fig. 5 & 7.
 
-vol_to_zarr.py <fn.vol> z x y chunk
+[Full Sampling](https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6641498832502784)
 
-e.g.
+[Limited Tilt](https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6673863692779520)
 
-vol_to_zarr.py volume_1.vol 200 3000 3000 100
+[Restored Limited Tilt](https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6327975145373696)
 
-vol_to_zarr.py volume_2.vol 200 3000 3000 100
+### 5x5 Serial Montage
+Dataset shown in Extended Data Fig. 6.
 
-run resolution estimation on the volumes
+[Serial Montage](https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5491865976569856)
 
-resolution_measure.py <zarr file1> <zarr file2> <ncores> <cube size>[ -ps <pixel_size=50> --snrt <snrt value=.2071>]
 
-resolution_measure.py jaspersLegCryo_r1_50nm_rec_cone_01799_10001800.zarr jaspersLegCryo_r1_50nm_rec_cone_12000_10001800.zarr 8 200 --snrt 0.143
+## Analysis Code
+
+### Tomographic Reconstruction
+Tomograms were reconstructed using the [TXBR package](linkinghub.elsevier.com/retrieve/pii/S1047-8477(12)00186-4). See also [Phan et al. 2012](linkinghub.elsevier.com/retrieve/pii/S1047-8477(12)00186-4).
+
+### Fourier Shell Correlation
+FSC figures were generated from the jupyter notebook "250614_plot_FSC_figs.ipynb". The FSC calculations were performed using the python script "250613_ab_calc_tomo_FSCs_2d_incr.py", which requires sub-sampled tomograms (e.g. from even-only or odd-only projections) to already be available. 
+
+### Fiducial-Based Resolution Measurements
+Figures relating to fiducial (gold bead) measurements were generated from the jupyter notebook "bead_resolution/250826_bead_res.ipynb". Prerequisite calculations were made using the python script "bead_resolution/250826_download_bead_data.py".
+
